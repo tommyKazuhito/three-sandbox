@@ -1,13 +1,28 @@
 import path from 'path';
 
 import { defineConfig } from 'vite';
+// import { createHtmlPlugin } from 'vite-plugin-html';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+const root = `./src`;
+const publicDir = `../public`;
+
 export default defineConfig({
+  root,
+  publicDir,
   plugins: [
     tsconfigPaths({
-      extensions: ['.ts', '.js'],
+      root: '../',
     }),
+    /* createHtmlPlugin({
+      pages: [
+        {
+          entry: path.resolve(__dirname, './src/script/main.ts'),
+          filename: 'index.html',
+          template: path.resolve(__dirname, './src/html/index.html'),
+        },
+      ],
+    }),*/
   ],
   preview: {
     open: true,
