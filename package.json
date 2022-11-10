@@ -1,0 +1,36 @@
+{
+  "name": "three-tutorial",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "prepare": "husky install",
+    "_lint-script:config": "eslint -c .eslintrc.js './*.{js,ts}' --fix --ignore-pattern '!.*rc.js' --no-error-on-unmatched-pattern && prettier --write --no-error-on-unmatched-pattern ./*.{js,ts}",
+    "_lint-script:src": "eslint -c .eslintrc.js './src/**/*.{js,jsx,ts,tsx}' --fix --no-error-on-unmatched-pattern",
+    "lint-script": "npm-run-all -s _lint-script:*",
+    "format": "prettier --write --no-error-on-unmatched-pattern ./**/*.{js,jsx,ts,tsx}",
+    "lint-staged": "lint-staged",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "fs-extra": "^10.1.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4",
+    "vite": "^3.2.3",
+    "vite-plugin-html": "^3.2.0",
+    "vite-tsconfig-paths": "^3.5.2"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitThis": true,
+    "baseUrl": "./",
+    "paths": {
+      "@script/*": [
+        "./src/script/*"
+      ],
+      "@style/*": [
+        "./src/style/*"
+      ],
+      "@img/*": [
+        "./src/img/*"
+      ]
+    },
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
+  },
+  "include": [
+    "./src",
+    ".eslintrc.js",
+    "./vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
