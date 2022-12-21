@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Three.jsのスクリーン座標の算出 - 基本編</title>
+  <link rel="stylesheet" href="/destyle.css">
+</head>
+
+<body>
+  <div style="position: relative; overflow: hidden; width: 960px; height: 540px;">
+    <canvas id="app"></canvas>
+
+    <!-- ライン描画用のSVG -->
+    <svg style="position: absolute; top: 0; left: 0; width: 960px; height: 540px;">
+      <g stroke="white">
+        <line id="svgLine" x1="0" y1="0" x2="0" y2="0" stroke-width="3" />
+      </g>
+    </svg>
+
+    <!-- 座標表示用のdivタグ -->
+    <div id="hud" style="position: absolute; top: 0; left: 0; background: white"></div>
+  </div>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+
+</html>
