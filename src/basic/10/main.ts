@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { TDSLoader } from 'three/examples/jsm/loaders/TDSLoader';
 
 const init3ds = () => {
@@ -145,5 +146,80 @@ const initCollada = () => {
   tick();
 };
 
+const initGltf = () => {
+  // サイズを指定
+  const width = 960;
+  const height = 540;
+
+  const canvas = document.getElementById('app3') as HTMLCanvasElement;
+
+  // レンダラーを作成・初期設定
+  const renderer = new THREE.WebGLRenderer({ canvas });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(width, height);
+
+  // レンダラー側で影を有効に
+  renderer.shadowMap.enabled = true;
+
+  // シーンを作成
+  const scene = new THREE.Scene();
+
+  // カメラを作成
+  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000); // new THREE.PerspectiveCamera(視野角, アスペクト比, near, far)
+  // カメラの初期座標を設定
+  camera.position.set(0, 0, 5);
+  camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+  // カメラコントローラーを作成
+  // const controls = new OrbitControls(camera, canvas);
+  // controls.enableDamping = true;
+  // controls.dampingFactor = 0.2;
+  // controls.update();
+
+  // 平行光源を作成
+  const directionalLight = new THREE.DirectionalLight(0xffffff);
+  directionalLight.position.set(1, 1, 1);
+  scene.add(directionalLight);
+
+  // 環境光を追加
+  const ambientLight = new THREE.AmbientLight(0x333333);
+  scene.add(ambientLight);
+
+  // 3DS形式のモデルデータを読み込む
+  const loader = new GLTFLoader();
+  // テクスチャーのパスを指定
+  loader.load(
+    '/models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf',
+    (collada) => {
+      // 読み込み後に3D空間に追加
+      const model = collada.scene;
+      model.traverse((object) => {
+        console.log(object.name);
+        if (object.type === 'Mesh') {
+          object.receiveShadow = true;
+          object.castShadow = true;
+        }
+      });
+      // model.position.set(0, 1, 0);
+      scene.add(model);
+    }
+  );
+
+  // ヘルパー類を追加
+  scene.add(new THREE.CameraHelper(camera));
+  scene.add(new THREE.GridHelper(100, 100));
+  scene.add(new THREE.AxesHelper(300));
+
+  // 毎フレーム時に実行されるループイベントです
+  const tick = () => {
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(tick);
+  };
+
+  tick();
+};
+
 window.addEventListener('DOMContentLoaded', init3ds);
 window.addEventListener('DOMContentLoaded', initCollada);
+window.addEventListener('DOMContentLoaded', initGltf);
