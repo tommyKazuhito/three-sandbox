@@ -146,6 +146,13 @@ module.exports = {
       'error',
       { prefer: 'type-imports' },
     ],
+    '@typescript-eslint/no-unused-vars': [
+      2,
+      {
+        vars: 'local',
+        args: 'none',
+      },
+    ],
     '@typescript-eslint/no-use-before-define': [
       2,
       {
