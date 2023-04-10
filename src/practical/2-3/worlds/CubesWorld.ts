@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 import BasicView from '../views/BasicView';
 
-export default class WorldCubes extends BasicView {
+export default class CubesWorld extends BasicView {
   /** オブジェクトの個数 */
   static OBJECT_NUM = 3000;
 
@@ -57,7 +57,7 @@ export default class WorldCubes extends BasicView {
     const edges = new THREE.EdgesGeometry(geometryBox);
     const materialBox = new THREE.LineBasicMaterial({ color: 0xff0000 });
 
-    [...Array(WorldCubes.OBJECT_NUM)].forEach((_, i) => {
+    [...Array(CubesWorld.OBJECT_NUM)].forEach(() => {
       // 立方体を作る
       const edge = new THREE.LineSegments(edges, materialBox);
 
