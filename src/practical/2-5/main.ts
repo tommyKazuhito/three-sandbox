@@ -48,18 +48,29 @@ const init2d = () => {
   }
 
   // 2Dの初期化
-  const boxes: HTMLElement[] = [...Array(fftSize / 2)].map(() => {
-    const div = document.createElement('div');
-    div.classList.add('box');
-
-    containerElm.appendChild(div);
-    return div;
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  containerElm.appendChild(canvas);
+  canvas.width = (containerElm.clientWidth - 32) * window.devicePixelRatio;
+  canvas.height = (containerElm.clientHeight - 32) * window.devicePixelRatio;
+  gsap.set(canvas, {
+    width: containerElm.clientWidth - 32,
+    height: containerElm.clientHeight - 32,
   });
+
+  const resize = () => {
+    canvas.width = (containerElm.clientWidth - 32) * window.devicePixelRatio;
+    canvas.height = (containerElm.clientHeight - 32) * window.devicePixelRatio;
+    gsap.set(canvas, {
+      width: containerElm.clientWidth - 32,
+      height: containerElm.clientHeight - 32,
+    });
+  };
 
   // 描画処理
   let count = 0;
   const draw = () => {
-    if (!nodeAnalyzer) {
+    if (!nodeAnalyzer || !ctx) {
       return;
     }
 
@@ -68,18 +79,29 @@ const init2d = () => {
     // それぞれの周波数の振幅を取得
     nodeAnalyzer.getByteFrequencyData(freqByteData);
 
-    // 高さ・色の更新
-    boxes.forEach((box, i) => {
-      const freqSum = freqByteData[i];
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 値は256段階で取得できるので正規化して 0.0 〜 1.0 の値にする
-      const scale = freqSum / 256;
+    // 折れ線グラフの描画
+    freqByteData.forEach((freqSum, i) => {
+      const x = (i / (fftSize / 2)) * canvas.width;
+      const y = canvas.height - (freqSum / 256) * canvas.height;
+      const hue = (count + i) % 360;
 
-      // Y軸のスケールと色相を変更
-      gsap.set(box, {
-        scaleY: scale,
-        backgroundColor: `hsla(${(count % 360) + i}, 40%, 75%)`,
-      });
+      ctx.beginPath();
+      ctx.strokeStyle = `hsla(${hue}, 40%, 75%)`;
+      ctx.lineWidth = 2;
+
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        const prevX = ((i - 1) / (fftSize / 2)) * canvas.width;
+        const prevY =
+          canvas.height - (freqByteData[i - 1] / 256) * canvas.height;
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(x, y);
+      }
+
+      ctx.stroke();
     });
 
     count++;
@@ -90,7 +112,10 @@ const init2d = () => {
     draw();
   };
 
+  resize();
   tick();
+
+  window.addEventListener('resize', resize);
 };
 
 const init3d = () => {};
