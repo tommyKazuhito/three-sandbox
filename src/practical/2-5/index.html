@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScriptで作成するサウンドビジュアライザー - Web Audio APIとHTML Canvas - 応用編</title>
+  <link rel="stylesheet" href="/destyle.css">
+
+  <style>
+    .screen {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      color: #fff;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+
+    .hdg {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .btn-play,
+    .btn-stop {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      width: 120px;
+      padding: 10px;
+      text-align: center;
+      border: 1px solid currentColor;
+      border-radius: 50vh;
+    }
+
+    #app1 .container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 16px;
+      gap: 1px;
+    }
+
+    #app1 .box {
+      width: 1px;
+      height: 100%;
+      transform-origin: bottom center;
+      background: #fff;
+      transform: scale(1, 0);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="screen" id="app1">
+    <div class="container"></div>
+
+    <h1 class="hdg">Sound Visualizer 2D / Sound By 魔王魂</h1>
+
+    <button class="btn-play">Play</button>
+    <button class="btn-stop" hidden>Stop</button>
+
+    <audio src="./media/maou_short_14_shining_star.mp3" loop></audio>
+  </div>
+
+  <div class="screen" id="app2">
+    <div class="container"></div>
+
+    <h1 class="hdg">Sound Visualizer 3D / Sound By 魔王魂</h1>
+
+    <button class="btn-play">Play</button>
+    <button class="btn-stop" hidden>Stop</button>
+
+    <audio src="./media/maou_short_14_shining_star.mp3" loop></audio>
+  </div>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+
+</html>
