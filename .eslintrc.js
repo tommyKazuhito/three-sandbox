@@ -86,6 +86,7 @@ module.exports = {
       },
     ],
     'no-plusplus': 0,
+    'no-bitwise': [2, { int32Hint: true }],
     'no-restricted-syntax': [
       2,
       {
@@ -174,6 +175,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/no-loop-func': 0,
     '@typescript-eslint/consistent-type-assertions': 0,
     '@typescript-eslint/no-this-alias': 0,
     '@typescript-eslint/prefer-arrow-functions': 0,

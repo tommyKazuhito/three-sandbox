@@ -37,6 +37,7 @@
     "vite-tsconfig-paths": "^3.5.2"
   },
   "dependencies": {
+    "gl-matrix": "^3.4.3",
     "gsap": "3.11.0",
     "stats-js": "^1.0.1",
     "three": "^0.146.0",
