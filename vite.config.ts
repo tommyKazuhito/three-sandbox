@@ -1,5 +1,6 @@
 import path from 'path';
 
+import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
 // import { createHtmlPlugin } from 'vite-plugin-html';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -14,6 +15,7 @@ export default defineConfig({
     tsconfigPaths({
       root: '../',
     }),
+    vue(),
     /* createHtmlPlugin({
       pages: [
         {
@@ -35,5 +37,10 @@ export default defineConfig({
     },
     port: Number(process.env.BS_PORT) || 3300,
     open: true,
+  },
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.esm-bundler.js',
+    },
   },
 });

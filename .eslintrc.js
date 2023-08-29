@@ -8,7 +8,6 @@ module.exports = {
     'import/resolver': 'typescript',
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
   },
-  overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -191,4 +190,34 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['**/*.vue'],
+      parser: 'vue-eslint-parser',
+      parserOptions: {
+        ecmaVersion: 'latest',
+        project: ['./tsconfig.json'],
+      },
+      plugins: ['vue'],
+      extends: [
+        'plugin:vue/vue3-recommended',
+        '@vue/eslint-config-prettier',
+        '@vue/typescript/recommended',
+      ],
+      settings: {
+        'import/resolver': 'typescript',
+        'import/extensions': ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+      },
+      rules: {
+        'vue/html-self-closing': [
+          2,
+          {
+            html: {
+              void: 'always',
+            },
+          },
+        ],
+      },
+    },
+  ],
 };
