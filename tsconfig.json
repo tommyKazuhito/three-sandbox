@@ -24,7 +24,7 @@
       "@style/*": ["./src/style/*"],
       "@img/*": ["./src/img/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./src/script/types"]
+    "typeRoots": ["./node_modules/@types", "./src/@types"]
   },
   "include": ["./src", ".eslintrc.js", "./vite.config.ts"],
   "exclude": ["node_modules"]
